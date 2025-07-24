@@ -10,11 +10,11 @@ The pompyboard project can be roughly broken down into 5 parts:
 
 | Part     | Location                                       |
 | -------- | ---------------------------------------------- |
-| Firmware | [`./firmware/`](./firmware/)                   |
-| Driver   | [pompyboard/OpenTabletDriver][otd-fork] (fork) |
 | PCB      | [`./pcb/`](./pcb/)                             |
+| Firmware | [`./firmware/`](./firmware/)                   |
 | 3D model | [`./3d/`](./3d/)                               |
 | Website  | [`./web/`](./web/)                             |
+| Driver   | [pompyboard/OpenTabletDriver][otd-fork] (fork) |
 
 ## Setting up development environment
 
@@ -33,22 +33,15 @@ down. Just be clear about it.
 
 ### Formatting
 
-See [`./.vscode/settings.json`](./.vscode/settings.json) for more info.
+It is expected that all text-based files are formatted using the correct
+formatter before getting committed. See
+[`./.vscode/settings.json`](./.vscode/settings.json) for more info.
 
-| File type  | Formatter                                                    |
-| ---------- | ------------------------------------------------------------ |
-| markdown   | [prettier](https://prettier.io/)                             |
-| yaml       | [prettier](https://prettier.io/)                             |
-| json       | [prettier](https://prettier.io/)                             |
-| javascript | [prettier](https://prettier.io/)                             |
-| toml       | [taplo](https://taplo.tamasfe.dev/cli/usage/formatting.html) |
-| rust       | [rustfmt](https://github.com/rust-lang/rustfmt)              |
-| nix        | [nixfmt-rfc-style](https://github.com/NixOS/nixfmt)          |
-
-### 80 character rule
+### line length
 
 Keep your text under 80 characters and rust code under 100 characters per line
-unless absolutely necessary.
+unless absolutely necessary. If you are using vscode, a ruler should help you
+know when you are over that limit.
 
 ### Commit
 
