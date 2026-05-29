@@ -1,0 +1,18 @@
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+name: Spelling CI
+jobs:
+  ci:
+    name: Spelling CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: jdx/mise-action@v3
+        with:
+          experimental: true
+
+      - run: cspell .
