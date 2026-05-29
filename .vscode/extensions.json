@@ -16,6 +16,7 @@
         "dbaeumer.vscode-eslint",
 
         // rust & embedded
+        "atopile.atopile",
         "probe-rs.probe-rs-debugger",
         "rust-lang.rust-analyzer",
         "zixuanwang.linkerscript" // for memory.x

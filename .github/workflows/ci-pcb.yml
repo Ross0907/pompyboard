@@ -1,0 +1,24 @@
+on:
+  push:
+    paths:
+      - pcb/**
+  pull_request:
+    paths:
+      - pcb/**
+  workflow_dispatch:
+
+name: PCB CI
+jobs:
+  ci:
+    name: PCB CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: jdx/mise-action@v3
+        with:
+          experimental: true
+          working_directory: pcb
+
+      - run: mise build
+        working-directory: pcb

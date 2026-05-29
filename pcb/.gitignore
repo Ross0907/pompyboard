@@ -1,5 +1,16 @@
+# uv
+.venv/
+
+# atopile build outputs
+build/
+manufacturing/
+
+# atopile dependencies
+.ato/
+
+# KiCad
 *-backups/
-fp-info-cache
+fp*cache
 *.lck
 \#auto_saved_files#
 _autosave*

@@ -59,9 +59,13 @@
     "[toml]": {
         "editor.defaultFormatter": "tamasfe.even-better-toml"
     },
+    "[ato]": {
+        "editor.defaultFormatter": "atopile.atopile"
+    },
 
     // Spelling
     "cSpell.words": [
+        "atopile",
         "BetaHuhn",
         "bunx",
         "cachix",

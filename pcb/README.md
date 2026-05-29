@@ -1,6 +1,10 @@
 # PCB
 
-Designed with [KiCad][kicad].
+Designed with [atopile][ato] and [KiCad][kicad].
+
+## Designing
+
+1. Install [atopile][ato]
 
 ## Manufacturing
 
@@ -37,6 +41,7 @@ Both prototype and production PCB is manufactured by [JLCPCB][jlcpcb].
 15. Enter shipping info and follow JLCPCB's instruction (e.g. production file confirmation)
 16. Wait for a week and you'll receive your very own board!
 
+[ato]: https://atopile.io/
 [kicad]: https://www.kicad.org/
 [jlcpcb]: https://jlcpcb.com/
 [fab-toolkit]: https://github.com/bennymeg/Fabrication-Toolkit
