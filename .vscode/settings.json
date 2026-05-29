@@ -7,7 +7,8 @@
     },
     "files.associations": {
         "*.svd": "xml",
-        "*.css": "tailwindcss"
+        "*.css": "tailwindcss",
+        "LICENSE-*": "plaintext"
     },
 
     // Rust
@@ -88,6 +89,8 @@
         "hclk",
         "Intuos",
         "JLCPCB",
+        "licence",
+        "licences",
         "lpmm",
         "lsusb",
         "microcontroller",

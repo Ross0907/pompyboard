@@ -26,3 +26,16 @@ to contribute and join us in our quest to make the best hardware for our fellow 
 Wonkle is built by people like you.
 
 [![profile pictures of contributors](https://contrib.rocks/image?repo=wonkleio/wonkle)](https://github.com/wonkleio/wonkle/graphs/contributors)
+
+## License
+
+Different parts of the project are available under different licenses.
+
+All image, audio, and other resources are, unless otherwise specified, available under
+[`CC-BY-4.0`](https://spdx.org/licenses/CC-BY-4.0.html).
+
+The hardware designs are, unless otherwise specified, available under
+[`CERN-OHL-S-2.0`](https://spdx.org/licenses/CERN-OHL-S-2.0.html).
+
+All other code are, unless otherwise specified, available under
+[`MIT`](https://spdx.org/licenses/MIT.html).
