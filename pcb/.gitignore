@@ -4,6 +4,7 @@
 # atopile build outputs
 build/
 manufacturing/
+*.pdf
 
 # atopile dependencies
 .ato/

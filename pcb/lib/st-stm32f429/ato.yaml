@@ -1,0 +1,18 @@
+requires-atopile: ^0.15.3
+paths:
+  src: ./
+  layout: ./layouts
+builds:
+  default:
+    entry: st-stm32f429.ato:ST_STM32F429
+    hide_designators: true
+    exclude_checks:
+      - PCB.requires_drc_check
+  usage:
+    entry: usage.ato:Usage
+    hide_designators: true
+    exclude_checks:
+      - PCB.requires_drc_check
+package:
+  identifier: atopile/st-stm32f429
+  version: 0.1.0

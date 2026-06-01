@@ -1,0 +1,16 @@
+"""Wonkleboard mk.1 Lite - A new atopile project"""
+
+#pragma experiment("FOR_LOOP")
+#pragma experiment("BRIDGE_CONNECT")
+
+import ElectricPower
+import ElectricLogic
+
+from "../../../../lib/st-stm32f429/st-stm32f429.ato" import ST_STM32F429
+
+module App:
+    power_3v3 = new ElectricPower
+    mcu = new ST_STM32F429
+    reset = new ElectricLogic
+
+    power_3v3 ~ mcu.power_3v3

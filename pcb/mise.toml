@@ -3,7 +3,7 @@ uv = "0.11.16"
 
 [tasks]
 build = """
-for dir in */*/*; do
+for dir in src/*/*/*; do
   if [ -f "$dir/ato.yaml" ]; then
     (cd "$dir" && pwd && uv run ato build) || exit 1
   fi
@@ -11,7 +11,7 @@ done
 """
 
 validate = """
-for dir in */*/*; do
+for dir in src/*/*/*; do
   if [ -f "$dir/ato.yaml" ]; then
     (cd "$dir" && pwd && uv run ato validate) || exit 1
   fi

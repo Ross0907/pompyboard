@@ -18,10 +18,13 @@ words:
   - CHIPSERIE
   - clippy
   - codegen
+  - datasheet
   - defmt
   - drei
   - eabi
   - eabihf
+  - easyeda
+  - Elec
   - gpioa
   - GPIOB
   - gpioc
@@ -32,22 +35,43 @@ words:
   - grayscale
   - HASL
   - hclk
+  - INPC
+  - INPH
   - Intuos
   - JLCPCB
+  - JTAG
+  - JTCK
+  - JTDI
+  - JTDO
+  - JTMS
   - kicad
+  - kohm
+  - lcsc
   - licence
   - licences
   - lpmm
+  - LQFP
   - lsusb
+  - MDIO
   - microcontroller
+  - microcontrollers
+  - mosi
   - mrekk
+  - NJTRST
   - nreset
+  - NRST
   - ntrst
   - oklch
   - opencollective
+  - OUTPC
+  - OUTPH
+  - partno
+  - partnumber
   - PCBA
   - pclk
   - Phong
+  - pinout
+  - PJSEMI
   - pompy
   - pompydev
   - protonmail
@@ -55,26 +79,45 @@ words:
   - railpack
   - railwayapp
   - rgba
+  - RMII
   - RTTUI
   - rustflags
   - rustup
   - rybbit
+  - sclk
   - serde
   - shadcn
+  - SWCLK
+  - SWDIO
   - sysclk
+  - TAXM8M4RFDCET2T
   - Tdefmt
   - thumbv
   - Tlink
+  - TPS62152RGTR
+  - TRACESWO
   - trivago
+  - trst
   - turbopack
+  - UART
   - usbd
   - usbhid
   - usbutils
+  - VBAT
+  - VCAP
+  - vcaps
+  - VDDA
   - vitepress
+  - VREF
+  - VSSA
   - waitlist
   - WCAG
+  - WKUPPA
   - wonkle
   - Wonkleboard
   - wonkleio
   - Wonklepad
   - xlink
+  - xout
+  - Xtal
+  - Yangxing

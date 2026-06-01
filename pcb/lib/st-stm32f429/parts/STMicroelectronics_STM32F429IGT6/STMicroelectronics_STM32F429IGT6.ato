@@ -1,0 +1,193 @@
+import has_datasheet
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component STMicroelectronics_STM32F429IGT6_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C54328", date="2026-05-30T11:45:34.705212+00:00", checksum="8dda853c7ffd4c19b5fac4312c6cfa9e6b069c2c079ca0eaa8c98d8d87ce611c">
+
+    trait is_atomic_part<manufacturer="STMicroelectronics", partnumber="STM32F429IGT6", footprint="LQFP-176_L24.0-W24.0-P0.50-LS26.0-BL.kicad_mod", symbol="STM32F429IGT6.kicad_sym", model="LQFP-176_L24.0-W24.0-H1.4-LS26.0-P0.50.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C54328", manufacturer="STMicroelectronics", partno="STM32F429IGT6">
+    trait has_designator_prefix<prefix="U">
+    trait has_datasheet<datasheet="https://www.lcsc.com/datasheet/lcsc_datasheet_1811151534_STMicroelectronics-STM32F429IGT6_C54328.pdf">
+
+    # pins
+    signal BOOT0 ~ pin 166
+    signal BYPASS_REG ~ pin 48
+    signal NRST ~ pin 31
+    signal PA0_WKUPPA0 ~ pin 40
+    signal PA1 ~ pin 41
+    signal PA2 ~ pin 42
+    signal PA3 ~ pin 47
+    signal PA4 ~ pin 50
+    signal PA5 ~ pin 51
+    signal PA6 ~ pin 52
+    signal PA7 ~ pin 53
+    signal PA8 ~ pin 119
+    signal PA9 ~ pin 120
+    signal PA10 ~ pin 121
+    signal PA11 ~ pin 122
+    signal PA12 ~ pin 123
+    signal PA13JTMS_SWDIO ~ pin 124
+    signal PA14JTCK_SWCLK ~ pin 137
+    signal PA15JTDI ~ pin 138
+    signal PB0 ~ pin 56
+    signal PB1 ~ pin 57
+    signal PB2_BOOT1PB2 ~ pin 58
+    signal PB3JTDO_TRACESWO ~ pin 161
+    signal PB4NJTRST ~ pin 162
+    signal PB5 ~ pin 163
+    signal PB6 ~ pin 164
+    signal PB7 ~ pin 165
+    signal PB8 ~ pin 167
+    signal PB9 ~ pin 168
+    signal PB10 ~ pin 79
+    signal PB11 ~ pin 80
+    signal PB12 ~ pin 92
+    signal PB13 ~ pin 93
+    signal PB14 ~ pin 94
+    signal PB15 ~ pin 95
+    signal PC0 ~ pin 32
+    signal PC1 ~ pin 33
+    signal PC2 ~ pin 34
+    signal PC3 ~ pin 35
+    signal PC4 ~ pin 54
+    signal PC5 ~ pin 55
+    signal PC6 ~ pin 115
+    signal PC7 ~ pin 116
+    signal PC8 ~ pin 117
+    signal PC9 ~ pin 118
+    signal PC10 ~ pin 139
+    signal PC11 ~ pin 140
+    signal PC12 ~ pin 141
+    signal PC13 ~ pin 8
+    signal PC14_OSC32_INPC14 ~ pin 9
+    signal PC15_OSC32_OUTPC15 ~ pin 10
+    signal PD0 ~ pin 142
+    signal PD1 ~ pin 143
+    signal PD2 ~ pin 144
+    signal PD3 ~ pin 145
+    signal PD4 ~ pin 146
+    signal PD5 ~ pin 147
+    signal PD6 ~ pin 150
+    signal PD7 ~ pin 151
+    signal PD8 ~ pin 96
+    signal PD9 ~ pin 97
+    signal PD10 ~ pin 98
+    signal PD11 ~ pin 99
+    signal PD12 ~ pin 100
+    signal PD13 ~ pin 101
+    signal PD14 ~ pin 104
+    signal PD15 ~ pin 105
+    signal PDR_ON ~ pin 171
+    signal PE0 ~ pin 169
+    signal PE1 ~ pin 170
+    signal PE2 ~ pin 1
+    signal PE3 ~ pin 2
+    signal PE4 ~ pin 3
+    signal PE5 ~ pin 4
+    signal PE6 ~ pin 5
+    signal PE7 ~ pin 68
+    signal PE8 ~ pin 69
+    signal PE9 ~ pin 70
+    signal PE10 ~ pin 73
+    signal PE11 ~ pin 74
+    signal PE12 ~ pin 75
+    signal PE13 ~ pin 76
+    signal PE14 ~ pin 77
+    signal PE15 ~ pin 78
+    signal PF0 ~ pin 16
+    signal PF1 ~ pin 17
+    signal PF2 ~ pin 18
+    signal PF3 ~ pin 19
+    signal PF4 ~ pin 20
+    signal PF5 ~ pin 21
+    signal PF6 ~ pin 24
+    signal PF7 ~ pin 25
+    signal PF8 ~ pin 26
+    signal PF9 ~ pin 27
+    signal PF10 ~ pin 28
+    signal PF11 ~ pin 59
+    signal PF12 ~ pin 60
+    signal PF13 ~ pin 63
+    signal PF14 ~ pin 64
+    signal PF15 ~ pin 65
+    signal PG0 ~ pin 66
+    signal PG1 ~ pin 67
+    signal PG2 ~ pin 106
+    signal PG3 ~ pin 107
+    signal PG4 ~ pin 108
+    signal PG5 ~ pin 109
+    signal PG6 ~ pin 110
+    signal PG7 ~ pin 111
+    signal PG8 ~ pin 112
+    signal PG9 ~ pin 152
+    signal PG10 ~ pin 153
+    signal PG11 ~ pin 154
+    signal PG12 ~ pin 155
+    signal PG13 ~ pin 156
+    signal PG14 ~ pin 157
+    signal PG15 ~ pin 160
+    signal PH0_OSC_INPH0 ~ pin 29
+    signal PH1_OSC_OUTPH1 ~ pin 30
+    signal PH2 ~ pin 43
+    signal PH3 ~ pin 44
+    signal PH4 ~ pin 45
+    signal PH5 ~ pin 46
+    signal PH6 ~ pin 83
+    signal PH7 ~ pin 84
+    signal PH8 ~ pin 85
+    signal PH9 ~ pin 86
+    signal PH10 ~ pin 87
+    signal PH11 ~ pin 88
+    signal PH12 ~ pin 89
+    signal PH13 ~ pin 128
+    signal PH14 ~ pin 129
+    signal PH15 ~ pin 130
+    signal PI0 ~ pin 131
+    signal PI1 ~ pin 132
+    signal PI2 ~ pin 133
+    signal PI3 ~ pin 134
+    signal PI4 ~ pin 173
+    signal PI5 ~ pin 174
+    signal PI6 ~ pin 175
+    signal PI7 ~ pin 176
+    signal PI8 ~ pin 7
+    signal PI9 ~ pin 11
+    signal PI10 ~ pin 12
+    signal PI11 ~ pin 13
+    signal VBAT ~ pin 6
+    signal VCAP_1 ~ pin 81
+    signal VCAP_2 ~ pin 125
+    signal VDD ~ pin 15
+    VDD ~ pin 23
+    VDD ~ pin 36
+    VDD ~ pin 49
+    VDD ~ pin 62
+    VDD ~ pin 72
+    VDD ~ pin 82
+    VDD ~ pin 91
+    VDD ~ pin 103
+    VDD ~ pin 114
+    VDD ~ pin 127
+    VDD ~ pin 136
+    VDD ~ pin 149
+    VDD ~ pin 159
+    VDD ~ pin 172
+    signal VDDA ~ pin 39
+    signal VREFpos ~ pin 38
+    signal VSS ~ pin 14
+    VSS ~ pin 22
+    VSS ~ pin 61
+    VSS ~ pin 71
+    VSS ~ pin 90
+    VSS ~ pin 102
+    VSS ~ pin 113
+    VSS ~ pin 126
+    VSS ~ pin 135
+    VSS ~ pin 148
+    VSS ~ pin 158
+    signal VSSA ~ pin 37

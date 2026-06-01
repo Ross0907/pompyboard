@@ -1,0 +1,21 @@
+import has_datasheet
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component TAE_TAXM8M4RFDCET2T_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C403948", date="2026-06-01T09:48:46.016346+00:00", checksum="6e172682feebc5e8b5a036b7e62b8cf8a6c437debf286ebcfb44f817925d76fc">
+
+    trait is_atomic_part<manufacturer="TAE", partnumber="TAXM8M4RFDCET2T", footprint="CRYSTAL-SMD_4P-L3.2-W2.5-BL-2.kicad_mod", symbol="TAXM8M4RFDCET2T.kicad_sym", model="CRYSTAL-SMD_4P-L3.2-W2.5-BL-2.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C403948", manufacturer="TAE", partno="TAXM8M4RFDCET2T">
+    trait has_designator_prefix<prefix="X">
+    trait has_datasheet<datasheet="https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_Yajingxin-TAXM8M4RFDCET2T_C403948.pdf">
+
+    # pins
+    signal GND ~ pin 4
+    GND ~ pin 2
+    signal OSC1 ~ pin 1
+    signal OSC2 ~ pin 3
