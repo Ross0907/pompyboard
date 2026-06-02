@@ -38,7 +38,7 @@ Wonkle projects can be roughly broken down into 5 parts:
 
 - ✅ OK - Using AI to write code
 - ✅ OK - Using AI to help you analyze/understand
-- ❌ NOT OK - Using AI to write text
+- ❌ NOT OK - Using AI to write natural language
   - This applies to, but not limited to code comments, HTML contents,
     documentations, commit messages, and Pull request descriptions
 - ❌ NOT OK - Using AI to make slop
@@ -60,7 +60,7 @@ for more info.
 ### line length
 
 All human-written text files must have 100 characters or less per line unless absolutely necessary.
-When using vscode, there should be a line that indicates where the limit is.
+If you're using vscode, you should see a vertical line (ruler) that shows you where the limit is.
 
 ### Commits messages
 
