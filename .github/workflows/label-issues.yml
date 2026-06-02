@@ -1,0 +1,22 @@
+name: Label Issues
+
+on:
+  issues:
+    types:
+      - reopened
+      - opened
+
+jobs:
+  label_issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      # See https://docs.github.com/en/actions/tutorials/manage-your-work/add-labels-to-issues
+      - run: gh issue edit "$NUMBER" --add-label "$LABELS"
+        if: github.event.issue.labels == '[]'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          LABELS: meta:needs-review

@@ -1,0 +1,83 @@
+#
+# Meta
+#
+
+- color: e4e669
+  description: Already exists
+  name: meta:duplicate
+
+- color: e4e669
+  description: This doesn't seem right
+  name: meta:invalid
+
+- color: e4e669
+  description: We'll take a look at it
+  name: meta:needs-review
+
+#
+# Priority
+#
+
+- color: 7819cc
+  description: DROP EVERYTHING AND WORK ON THIS
+  name: priority:0-critical
+
+- color: 7819cc
+  description: This seems important
+  name: priority:1-high
+
+- color: 7819cc
+  description: Requires some attention
+  name: priority:2-moderate
+
+- color: 7819cc
+  description: Maybe we'll visit this one day
+  name: priority:3-low
+
+#
+# Project
+#
+
+- color: 009b66
+  description:
+  name: project:3d
+
+- color: 009b66
+  description:
+  name: project:docs
+
+- color: 009b66
+  description:
+  name: project:firmware
+
+- color: 009b66
+  description:
+  name: project:pcb
+
+- color: 009b66
+  description:
+  name: project:tablet-driver
+
+- color: 009b66
+  description:
+  name: project:web
+
+#
+# Type
+#
+
+- color: d73a4a
+  description: Something isn't working as intended
+  name: type:bug
+
+- color: 006b75
+  description: Somebody wants us to know this
+  name: type:report
+
+- color: 006b75
+  description: Improvements or additions
+  name: type:suggestion
+
+- color: 006b75
+  description: Somebody wants to know something
+  name: type:question
