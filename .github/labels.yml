@@ -39,27 +39,21 @@
 #
 
 - color: 009b66
-  description:
   name: project:3d
 
 - color: 009b66
-  description:
   name: project:docs
 
 - color: 009b66
-  description:
   name: project:firmware
 
 - color: 009b66
-  description:
   name: project:pcb
 
 - color: 009b66
-  description:
   name: project:tablet-driver
 
 - color: 009b66
-  description:
   name: project:web
 
 #
