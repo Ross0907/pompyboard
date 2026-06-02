@@ -69,8 +69,8 @@
   name: type:report
 
 - color: 006b75
-  description: Improvements or additions
-  name: type:suggestion
+  description: Hey, let's do this
+  name: type:proposition
 
 - color: 006b75
   description: Somebody wants to know something
