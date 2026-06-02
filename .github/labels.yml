@@ -65,13 +65,13 @@
   name: type:bug
 
 - color: 006b75
-  description: Somebody wants us to know this
-  name: type:report
-
-- color: 006b75
   description: Hey, let's do this
   name: type:proposition
 
 - color: 006b75
   description: Somebody wants to know something
   name: type:question
+
+- color: 006b75
+  description: Somebody wants us to know this
+  name: type:report
