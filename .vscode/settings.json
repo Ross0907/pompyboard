@@ -19,43 +19,11 @@
         "editor.defaultFormatter": "rust-lang.rust-analyzer"
     },
 
-    // web
+    // Etc
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[postcss]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-
-    // Etc
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[github-actions-workflow]": {
+    "[javascript][javascriptreact][typescript][typescriptreact][css][postcss][json][jsonc][markdown][yaml][github-actions-workflow]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[toml]": {
