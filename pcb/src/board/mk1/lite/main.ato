@@ -1,4 +1,4 @@
-"""Wonkleboard mk.1 Lite - A new atopile project"""
+"""Wonkleboard mk.1 Lite"""
 
 #pragma experiment("FOR_LOOP")
 #pragma experiment("BRIDGE_CONNECT")
