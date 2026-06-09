@@ -1,6 +1,11 @@
+# https://cspell.org/docs/Configuration/properties
+
 version: "0.2"
 useGitignore: true
+enableGlobDot: true
 ignorePaths:
+  - .git/
+  - "*/.cargo/*"
   - "*.kicad_mod"
   - "*.kicad_pcb"
   - "*.kicad_prl"
@@ -12,13 +17,20 @@ ignorePaths:
   - "*.svd"
   - "**/parts/**/*.ato"
   - "*fp-lib-table"
+ignoreRegExpList:
+  # don't spell check vscode extension IDs
+  - '"editor.defaultFormatter"\s*:\s*"[^"]*"'
+  - '"recommendations"\s*:\s*\[[\s\S]*?\]'
 words:
   - ˈwɑːŋkəl
   - atopile
+  - BetaHuhn
   - boiz
   - bunx
+  - cachix
   - CCMRAM
   - cfgr
+  - clippy
   - codegen
   - datasheet
   - defmt
@@ -62,11 +74,13 @@ words:
   - Phong
   - pinout
   - PJSEMI
+  - pompydev
   - protonmail
   - PWRCLK
   - railpack
   - railwayapp
   - RTTUI
+  - rustup
   - rybbit
   - sclk
   - serde
@@ -88,12 +102,15 @@ words:
   - VCAP
   - vcaps
   - VDDA
+  - venv
   - vitepress
   - VREF
   - VSSA
+  - waitlist
   - WKUPPA
   - wonkle
   - Wonkleboard
+  - wonkleio
   - Wonklepad
   - xlink
   - xout
