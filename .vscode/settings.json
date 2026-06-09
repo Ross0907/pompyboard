@@ -2,6 +2,7 @@
     // General
     "editor.formatOnSave": true,
     "editor.rulers": [100],
+    "deno.enablePaths": ["./scripts"],
     "cSpell.import": ["${workspaceFolder}/cspell.yaml"],
     "files.readonlyInclude": {
         "web/convex/_generated/*": true
