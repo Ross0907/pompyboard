@@ -1,5 +1,6 @@
 [tools]
 rust = { version = "1.93.0", profile = "default", targets = "thumbv7em-none-eabihf" }
+cargo-binstall = "1.20.0"
 "nix:usbutils" = "018"
 "nix:probe-rs-tools" = "0.31.0"
 

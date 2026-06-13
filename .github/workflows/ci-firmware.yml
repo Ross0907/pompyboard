@@ -28,10 +28,15 @@ jobs:
 
       - run: rustup component add rustfmt
 
+      - run: cargo binstall cargo-audit --no-confirm
+
       - run: cargo check
         working-directory: firmware
 
       - run: cargo clippy -- -W clippy::pedantic
+        working-directory: firmware
+
+      - run: cargo audit
         working-directory: firmware
 
       - run: cargo fmt --all -- --check
