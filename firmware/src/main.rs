@@ -20,7 +20,12 @@ mod usb;
 fn main() -> ! {
     let dp = Peripherals::take().unwrap(); // device peripheral
     let rcc = dp.RCC.constrain();
-    let clocks = rcc.cfgr.sysclk(180.MHz()).require_pll48clk().freeze();
+    let clocks = rcc
+        .cfgr
+        .sysclk(48.MHz())
+        .pclk1(24.MHz())
+        .require_pll48clk()
+        .freeze();
 
     let gpioa = dp.GPIOA.split();
     let gpioc = dp.GPIOC.split();
@@ -66,17 +71,14 @@ fn main() -> ! {
 
     let mut report = tablet::Report::default();
 
-    let button_pin = gpioe.pe2.into_pull_up_input();
+    // let button_pin = gpioe.pe2.into_pull_up_input();
 
     loop {
         let (x, y) = sensor.scan();
         report.x = x;
         report.y = y;
 
-        defmt::info!("{:06} {:06} {}", x, y, button_pin.is_low() as usize);
-
-        // usb::poll();
-        // usb::push(report).ok().unwrap_or(0);
-        // cortex_m::asm::delay(10_000_000); // uncomment to reduce the log flicker
+        usb::poll();
+        usb::push(report).ok().unwrap_or(0);
     }
 }

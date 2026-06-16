@@ -155,8 +155,6 @@ impl Sensor {
     fn read_row(&mut self, i: usize) {
         self.select_row(i);
 
-        cortex_m::asm::delay(100_000); // temporary hack to reduce mux channel crosstalk
-
         unsafe {
             DATA[i * COL_LEN + 00] = threshold(self.adc3.convert(&self.in0, SAMPLE_TIME));
             DATA[i * COL_LEN + 01] = threshold(self.adc3.convert(&self.in1, SAMPLE_TIME));
