@@ -10,6 +10,7 @@ use stm32f4xx_hal::{
     otg_fs::USB,
     pac::Peripherals,
     prelude::*,
+    rcc::Config,
 };
 
 mod sensor;
@@ -19,22 +20,21 @@ mod usb;
 #[cortex_m_rt::entry]
 fn main() -> ! {
     let dp = Peripherals::take().unwrap(); // device peripheral
-    let rcc = dp.RCC.constrain();
-    let clocks = rcc
-        .cfgr
-        .sysclk(48.MHz())
-        .pclk1(24.MHz())
-        .require_pll48clk()
-        .freeze();
+    let mut rcc = dp.RCC.freeze(
+        Config::hsi()
+            .sysclk(48.MHz())
+            .pclk1(24.MHz())
+            .require_pll48clk(),
+    );
 
-    let gpioa = dp.GPIOA.split();
-    let gpioc = dp.GPIOC.split();
-    let gpioe = dp.GPIOE.split();
-    let gpiof = dp.GPIOF.split();
+    let gpioa = dp.GPIOA.split(&mut rcc);
+    let gpioc = dp.GPIOC.split(&mut rcc);
+    let gpioe = dp.GPIOE.split(&mut rcc);
+    let gpiof = dp.GPIOF.split(&mut rcc);
 
     let mut sensor = sensor::Sensor::new(
-        Adc::adc2(dp.ADC2, true, AdcConfig::default()),
-        Adc::adc3(dp.ADC3, true, AdcConfig::default()),
+        Adc::new(dp.ADC2, true, AdcConfig::default(), &mut rcc),
+        Adc::new(dp.ADC3, true, AdcConfig::default(), &mut rcc),
         gpioe.pe6.into_push_pull_output(),
         gpioe.pe5.into_push_pull_output(),
         gpioe.pe4.into_push_pull_output(),
@@ -66,7 +66,7 @@ fn main() -> ! {
         usb_pwrclk: dp.OTG_FS_PWRCLK,
         pin_dm: gpioa.pa11.into(),
         pin_dp: gpioa.pa12.into(),
-        hclk: clocks.hclk(),
+        hclk: rcc.clocks.hclk(),
     });
 
     let mut report = tablet::Report::default();
