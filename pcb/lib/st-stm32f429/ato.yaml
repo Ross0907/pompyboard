@@ -14,5 +14,5 @@ builds:
     exclude_checks:
       - PCB.requires_drc_check
 package:
-  identifier: atopile/st-stm32f429
+  identifier: wonkle/st-stm32f429
   version: 0.1.0

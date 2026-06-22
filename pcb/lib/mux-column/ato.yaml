@@ -1,0 +1,16 @@
+requires-atopile: "0.15.7"
+
+paths:
+  src: ./
+  layout: ./layouts
+
+builds:
+  default:
+    entry: mux-column.ato:MuxColumn
+    hide_designators: true
+    exclude_checks:
+      - PCB.requires_drc_check
+
+package:
+  identifier: wonkleio/mux-column
+  version: 0.1.0

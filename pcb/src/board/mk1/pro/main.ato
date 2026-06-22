@@ -4,6 +4,7 @@ import ElectricPower
 import ElectricLogic
 
 from "../../../../lib/st-stm32f429/st-stm32f429.ato" import ST_STM32F429
+from "../../../../lib/mux-column/mux-column.ato" import MuxColumn
 
 module App:
     power_3v3 = new ElectricPower
@@ -11,3 +12,31 @@ module App:
     reset = new ElectricLogic
 
     power_3v3 ~ mcu.power_3v3
+
+    mux_columns = new MuxColumn[19]
+    for mux_col in mux_columns:
+        mux_col.power_3v3 ~ power_3v3
+        mux_col.S0 ~ mcu.gpio_e[6].line
+        mux_col.S1 ~ mcu.gpio_e[5].line
+        mux_col.S2 ~ mcu.gpio_e[4].line
+        mux_col.S3 ~ mcu.gpio_e[3].line
+
+    mux_columns[0].OUT ~ mcu.gpio_f[3].line
+    mux_columns[1].OUT ~ mcu.gpio_f[4].line
+    mux_columns[2].OUT ~ mcu.gpio_f[5].line
+    mux_columns[3].OUT ~ mcu.gpio_f[6].line
+    mux_columns[4].OUT ~ mcu.gpio_f[7].line
+    mux_columns[5].OUT ~ mcu.gpio_f[8].line
+    mux_columns[6].OUT ~ mcu.gpio_f[9].line
+    mux_columns[7].OUT ~ mcu.gpio_f[10].line
+    mux_columns[8].OUT ~ mcu.gpio_c[1].line
+    mux_columns[9].OUT ~ mcu.gpio_c[2].line
+    mux_columns[10].OUT ~ mcu.gpio_c[3].line
+    mux_columns[11].OUT ~ mcu.gpio_a[1].line
+    mux_columns[12].OUT ~ mcu.gpio_a[2].line
+    mux_columns[13].OUT ~ mcu.gpio_a[3].line
+    mux_columns[14].OUT ~ mcu.gpio_a[4].line
+    mux_columns[15].OUT ~ mcu.gpio_a[6].line
+    mux_columns[16].OUT ~ mcu.gpio_a[7].line
+    mux_columns[17].OUT ~ mcu.gpio_c[4].line
+    mux_columns[18].OUT ~ mcu.gpio_c[5].line

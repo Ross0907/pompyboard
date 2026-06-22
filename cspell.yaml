@@ -33,6 +33,7 @@ words:
   - cfgr
   - clippy
   - codegen
+  - COMMONINOUT
   - datasheet
   - defmt
   - drei
