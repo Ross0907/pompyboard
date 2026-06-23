@@ -1,0 +1,66 @@
+#pragma experiment("BRIDGE_CONNECT")
+
+import Capacitor
+import ElectricLogic
+import ElectricPower
+import Inductor
+import Resistor
+
+from "parts/Texas_Instruments_TPS62152RGTR/Texas_Instruments_TPS62152RGTR.ato" import Texas_Instruments_TPS62152RGTR_package
+
+module BuckConverter:
+    """
+    3.3V output step-down buck converter.
+    """
+
+    IN = new ElectricPower
+    IN.required = True
+    # The TPS62152 regulator accepts 3-17V input, but it's hard to find good decoupling capacitors
+    # for voltage above 10V, so this module lowers the constraint to that of 5V USB power.
+    # USB specifications allow 5V power to deviate with a range of ±5% (4.75V ~ 5.25V).
+    assert IN.voltage within 4.5V to 5.5V
+
+    OUT = new ElectricPower
+    OUT.required = True
+    assert OUT.voltage within 3.2V to 3.4V
+    IN.lv ~ OUT.lv
+
+    regulator = new Texas_Instruments_TPS62152RGTR_package
+
+    IN.hv ~ regulator.PVIN
+    IN.hv ~ regulator.AVIN
+    IN.hv ~ regulator.EN
+
+    IN.lv ~ regulator.PGND
+    IN.lv ~ regulator.AGND
+    IN.lv ~ regulator.FB
+    IN.lv ~ regulator.DEF
+    IN.lv ~ regulator.FSW
+
+    OUT.hv ~ regulator.VOS
+
+    in_cap = new Capacitor
+    in_cap.capacitance = 10uF +/- 20%
+    assert in_cap.max_voltage >= 2*IN.voltage
+    in_cap.package = "0402"
+    IN.hv ~> in_cap ~> IN.lv
+
+    out_cap = new Capacitor
+    out_cap.capacitance = 22uF +/- 20%
+    assert out_cap.max_voltage >= 2*OUT.voltage
+    out_cap.package = "0402"
+    OUT.hv ~> out_cap ~> OUT.lv
+
+    ss_tr_cap = new Capacitor
+    ss_tr_cap.capacitance = 3.3nF +/- 10%
+    ss_tr_cap.package = "0402"
+    regulator.SS_TR ~> ss_tr_cap ~> IN.lv
+
+    inductor = new Inductor
+    inductor.inductance = 2.2uH +/- 10%
+    regulator.SW ~> inductor ~> OUT.hv
+
+    pg_pullup = new Resistor
+    pg_pullup.resistance = 100kohm +/- 1%
+    pg_pullup.package = "0603"
+    OUT.hv ~> pg_pullup ~> regulator.PG

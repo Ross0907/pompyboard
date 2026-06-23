@@ -23,7 +23,9 @@ ignoreRegExpList:
   - '"recommendations"\s*:\s*\[[\s\S]*?\]'
 words:
   - ˈwɑːŋkəl
+  - AGND
   - atopile
+  - AVIN
   - BetaHuhn
   - binstall
   - boiz
@@ -74,11 +76,15 @@ words:
   - OUTPH
   - PCBA
   - pclk
+  - PGND
   - Phong
   - pinout
   - PJSEMI
   - pompydev
   - protonmail
+  - PSRR
+  - pullup
+  - PVIN
   - PWRCLK
   - railpack
   - railwayapp
@@ -102,11 +108,13 @@ words:
   - usbhid
   - usbutils
   - VBAT
+  - VBUS
   - VCAP
   - vcaps
   - VDDA
   - venv
   - vitepress
+  - VOUT
   - VREF
   - VSSA
   - waitlist

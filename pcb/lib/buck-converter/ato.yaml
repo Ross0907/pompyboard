@@ -1,0 +1,13 @@
+requires-atopile: "^0.15.7"
+
+paths:
+  src: ./
+  layout: ./layouts
+
+builds:
+  default:
+    entry: buck_converter.ato:BuckConverter
+
+package:
+  identifier: wonkle/buck-converter
+  version: 0.1.0

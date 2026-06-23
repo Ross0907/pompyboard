@@ -5,9 +5,22 @@ import ElectricLogic
 
 from "../../../../lib/st-stm32f429/st-stm32f429.ato" import ST_STM32F429
 from "../../../../lib/mux-column/mux-column.ato" import MuxColumn
+from "../../../../lib/buck-converter/buck_converter.ato" import BuckConverter
+from "parts/GCT_USB4085_GF_A/GCT_USB4085_GF_A.ato" import GCT_USB4085_GF_A_package
 
 module App:
+    usb = new GCT_USB4085_GF_A_package
+    power_usb = new ElectricPower
+    power_usb.voltage = 5V
+    usb.VBUS ~ power_usb.hv
+    usb.GND ~ power_usb.lv
+
+    buck_converter = new BuckConverter
     power_3v3 = new ElectricPower
+    power_3v3.voltage = 3.3V
+    buck_converter.IN ~ power_usb
+    buck_converter.OUT ~ power_3v3
+
     mcu = new ST_STM32F429
     reset = new ElectricLogic
 
