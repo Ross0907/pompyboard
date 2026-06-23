@@ -35,6 +35,8 @@ variants can be found in page 225 part numbering section of the datasheet.
 - [reference manual (RM0090)][ref]
   - page 390 - ADC
   - page 1369 - USB
+- [ADC application note][adc]
 
 [datasheet]: https://www.st.com/content/ccc/resource/technical/document/datasheet/03/b4/b2/36/4c/72/49/29/DM00071990.pdf/files/DM00071990.pdf/jcr:content/translations/en.DM00071990.pdf
 [ref]: https://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf
+[adc]: https://www.st.com/resource/en/application_note/an2834-how-to-optimize-the-adc-accuracy-in-the-stm32-mcus-stmicroelectronics.pdf
