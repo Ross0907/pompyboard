@@ -7,6 +7,7 @@
 - https://github.com/rust-embedded/cortex-m
 - https://defmt.ferrous-systems.com
 - https://docs.rust-embedded.org/book
+- [`pcb/lib/st-stm32f429/README.md`](../pcb/lib/st-stm32f429/README.md)
 - (optional) also check
   - https://github.com/rust-lang/rustlings
   - https://www.youtube.com/@therustybits/videos
