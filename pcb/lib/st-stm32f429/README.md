@@ -7,6 +7,7 @@ The specific model used by wonkle products is STM32F429**IGT6**. Difference betw
 variants can be found in page 225 part numbering section of the datasheet.
 
 - [datasheet (DS9405)][datasheet]
+  - see table of contents (page 3) for more info
   - page 13 - what the document is
   - page 19 - board design
   - page 20 - block diagram
@@ -33,8 +34,23 @@ variants can be found in page 225 part numbering section of the datasheet.
   - page 225 - part numbering
   - page 229 - USB OTG HS
 - [reference manual (RM0090)][ref]
+  - see table of contents (page 2) for more info
+  - page 59 - Memory
+  - page 73 - Flash Memory
+  - page 113 - CRC
+  - page 116 - Power
+  - page 151 - RCC
+  - page 153 - Clock tree
+  - page 269 - GPIO
+  - page 304 - DMA
+  - page 373 - Interrupts & Events
   - page 390 - ADC
-  - page 1369 - USB
+  - page 480 - LCD-TFT Controller
+  - page 515 - Timers
+  - page 960 - USART
+  - page 1228 - USB OTG_FS
+  - page 1369 - USB OTG_HS
+  - page 1671 - Debug
 - [ADC application note][adc]
 
 ## ADC pins
