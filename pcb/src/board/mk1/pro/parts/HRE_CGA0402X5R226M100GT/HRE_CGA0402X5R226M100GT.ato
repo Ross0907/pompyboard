@@ -6,7 +6,7 @@ import is_auto_generated
 component HRE_CGA0402X5R226M100GT_package:
     # This trait marks this file as auto-generated
     # If you want to manually change it, remove the trait
-    trait is_auto_generated<system="ato_part", source="easyeda:C6119813", date="2026-06-23T07:39:14.920739+00:00", checksum="5f95a73ae5213a69532d97ef2a9127564f80079936bbc48fe55451703ed0973a">
+    trait is_auto_generated<system="ato_part", source="easyeda:C6119813", date="2026-06-25T13:20:07.449374+00:00", checksum="a16a3c2042b98c23e45e2c3b14f2f72f8c6fb27da0ee45031ab5735044d4b917">
 
     trait is_atomic_part<manufacturer="HRE", partnumber="CGA0402X5R226M100GT", footprint="C0402.kicad_mod", symbol="CGA0402X5R226M100GT.kicad_sym", model="C0402_L1.0-W0.5-H0.5.step">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C6119813", manufacturer="HRE", partno="CGA0402X5R226M100GT">

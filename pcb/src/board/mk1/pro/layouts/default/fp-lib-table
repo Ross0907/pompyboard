@@ -126,4 +126,18 @@
 		(options "")
 		(descr "atopile: part lib: HRE_CGA0402X5R226M100GT")
 	)
+	(lib
+		(name "Samsung_Electro_Mechanics_CL05A475MP5NRNC")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../parts/Samsung_Electro_Mechanics_CL05A475MP5NRNC")
+		(options "")
+		(descr "atopile: part lib: Samsung_Electro_Mechanics_CL05A475MP5NRNC")
+	)
+	(lib
+		(name "Samsung_Electro_Mechanics_CL05B103KB5NNNC")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../parts/Samsung_Electro_Mechanics_CL05B103KB5NNNC")
+		(options "")
+		(descr "atopile: part lib: Samsung_Electro_Mechanics_CL05B103KB5NNNC")
+	)
 )

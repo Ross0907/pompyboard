@@ -39,11 +39,18 @@ module ST_STM32F429:
     power_analog.lv ~ package.VSSA
     power_analog ~ power_3v3
 
-    # decoupling capacitors, see page 92 and 97 of the STM32F429 datasheet
+    # VBAT should be connected to VDD when no backup battery is used.
+    # See STM32F429 datasheet Section 3.16 (page 26).
+    package.VBAT ~ power_3v3.hv
+
+    # VCAP_1 and VCAP_2: 2 x 2.2uF ceramic capacitors for the internal regulator.
+    # See STM32F429 datasheet Figure 22 (page 92) and Table 19 / Figure 24 (page 97).
     power_vcaps = new ElectricPower[2]
     for vcap in power_vcaps:
-        vcap.hv ~ package.VCAP_1
         vcap.lv ~ power_3v3.lv
+    power_vcaps[0].hv ~ package.VCAP_1
+    power_vcaps[1].hv ~ package.VCAP_2
+
     vcap_caps = new Capacitor[2]
     for cap in vcap_caps:
         cap.capacitance = 2.2uF +/- 20%
@@ -51,36 +58,38 @@ module ST_STM32F429:
     power_vcaps[0].hv ~> vcap_caps[0] ~> power_vcaps[0].lv
     power_vcaps[1].hv ~> vcap_caps[1] ~> power_vcaps[1].lv
 
-    # decoupling capacitors between buck converter and MCU,
-    # see page 22 Figure 9-28 of TPS62152 datasheet.
+    # VDD/VSS decoupling: 15 x 100nF + 1 x 4.7uF ceramic capacitors placed as close as possible to
+    # the VDD/VSS pins.
+    # See STM32F429 datasheet Figure 9-28 (page 22), Figure 22 (page 92), and caution (page 92).
     # Also see https://youtu.be/ARwBwHZESOY?t=3349 to learn about capacitor size selection.
-    decoupling_3v3 = new Capacitor[10]
-    for cap in decoupling_3v3:
+    decoupling_3v3_small = new Capacitor[15]
+    for cap in decoupling_3v3_small:
         cap.capacitance = 100nF +/- 20%
         cap.package = "0402"
         power_3v3.hv ~> cap ~> power_3v3.lv
 
-    decoupling_vdda = new Capacitor[2]
-    for cap in decoupling_vdda:
-        cap.capacitance = 100nF +/- 20%
-        cap.package = "0402"
-        power_analog.hv ~> cap ~> power_analog.lv
+    decoupling_3v3_bulk = new Capacitor
+    decoupling_3v3_bulk.capacitance = 4.7uF +/- 20%
+    decoupling_3v3_bulk.package = "0402"
+    power_3v3.hv ~> decoupling_3v3_bulk ~> power_3v3.lv
 
-    # VREF positive reference for ADC/DAC — tie to analog 3.3 V and decouple
+    # VDDA/VSSA decoupling: 1uF // 10nF ceramic capacitors placed as close as possible to
+    # the VDDA/VSSA pins. VREF+ is tied to VDDA, so the same network also decouples the
+    # reference input. See STM32F429 datasheet Figure 53 (page 164) and
+    # the general PCB design guidelines on page 163.
+    decoupling_vdda_bulk = new Capacitor
+    decoupling_vdda_bulk.capacitance = 1uF +/- 20%
+    decoupling_vdda_bulk.package = "0402"
+    power_analog.hv ~> decoupling_vdda_bulk ~> power_analog.lv
+
+    decoupling_vdda_small = new Capacitor
+    decoupling_vdda_small.capacitance = 10nF +/- 20%
+    decoupling_vdda_small.package = "0402"
+    power_analog.hv ~> decoupling_vdda_small ~> power_analog.lv
+
+    # VREF+ is tied to VDDA and shares the VDDA 1uF // 10nF decoupling network.
+    # See STM32F429 datasheet Figure 53 (page 164).
     power_analog.hv ~ package.VREFpos
-    vref_caps = new Capacitor[2]
-    vref_caps[0].capacitance = 1uF +/- 20%
-    vref_caps[0].package = "0402"
-    vref_caps[1].capacitance = 100nF +/- 20%
-    vref_caps[1].package = "0402"
-    for cap in vref_caps:
-        package.VREFpos ~> cap ~> power_analog.lv
-
-    # Backup domain
-    # VBAT should be supplied externally if RTC/backup used; leave exposed
-    vbat = new ElectricPower
-    vbat.hv ~ package.VBAT
-    vbat.lv ~ power_3v3.lv
 
     """
     SWD
