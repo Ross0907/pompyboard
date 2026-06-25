@@ -33,13 +33,13 @@ module ST_STM32F429:
     package.VDD ~ power_3v3.hv
     package.VSS ~ power_3v3.lv
 
-    # page 26 of datasheet (DS9405): "VDDA and VSSA must be connected to VDD and VSS, respectively"
+    # page 26 of STM32F429 datasheet: "VDDA and VSSA must be connected to VDD and VSS, respectively"
     power_analog = new ElectricPower  # Analog domain (VDDA/VSSA)
     power_analog.hv ~ package.VDDA
     power_analog.lv ~ package.VSSA
     power_analog ~ power_3v3
 
-    # decoupling capacitors, see page 92 and 97 of the datasheet (DS9405)
+    # decoupling capacitors, see page 92 and 97 of the STM32F429 datasheet
     power_vcaps = new ElectricPower[2]
     for vcap in power_vcaps:
         vcap.hv ~ package.VCAP_1
@@ -51,6 +51,9 @@ module ST_STM32F429:
     power_vcaps[0].hv ~> vcap_caps[0] ~> power_vcaps[0].lv
     power_vcaps[1].hv ~> vcap_caps[1] ~> power_vcaps[1].lv
 
+    # decoupling capacitors between buck converter and MCU,
+    # see page 22 Figure 9-28 of TPS62152 datasheet.
+    # Also see https://youtu.be/ARwBwHZESOY?t=3349 to learn about capacitor size selection.
     decoupling_3v3 = new Capacitor[10]
     for cap in decoupling_3v3:
         cap.capacitance = 100nF +/- 20%
@@ -111,11 +114,8 @@ module ST_STM32F429:
     # High-Speed USB communication (USB OTG HS), an external oscillator with higher accuracy is
     # needed.
     #
-    # See page 120 ~ 121 of the datasheet (DS9405) for more info. Also read "Oscillator design guide
-    # for ST microcontrollers" (AN2867)[^1] for more context about the specific values of the
-    # components, especially the resistor.
-    #
-    # [^1]: https://www.st.com/resource/en/application_note/an2867-guidelines-for-oscillator-design-on-stm8afals-and-stm32-mcusmpus-stmicroelectronics.pdf
+    # See page 120 and 121 of the STM32F429 datasheet for more info. Also read oscillator 
+    # application note for more context about the specific values of the components.
     hse = new XtalIF
     hse.xin ~ package.PH0_OSC_INPH0
     hse.xout ~ package.PH1_OSC_OUTPH1

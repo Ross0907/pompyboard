@@ -52,6 +52,9 @@ variants can be found in page 225 part numbering section of the datasheet.
   - page 1369 - USB OTG_HS
   - page 1671 - Debug
 - [ADC application note][adc]
+  - see table of contents (page 2) for more info
+- [oscillator application note][oscillator]
+  - see table of contents (page 2) for more info
 
 ## ADC pins
 
@@ -87,3 +90,4 @@ ADC-capable GPIO pins taken from datasheet Table 10, pages 53-59.
 [datasheet]: https://www.st.com/content/ccc/resource/technical/document/datasheet/03/b4/b2/36/4c/72/49/29/DM00071990.pdf/files/DM00071990.pdf/jcr:content/translations/en.DM00071990.pdf
 [ref]: https://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf
 [adc]: https://www.st.com/resource/en/application_note/an2834-how-to-optimize-the-adc-accuracy-in-the-stm32-mcus-stmicroelectronics.pdf
+[oscillator]: https://www.st.com/resource/en/application_note/an2867-guidelines-for-oscillator-design-on-stm8afals-and-stm32-mcusmpus-stmicroelectronics.pdf
