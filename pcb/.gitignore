@@ -1,21 +1,17 @@
-# uv
-.venv/
+# bun
+/node_modules/
 
-# atopile build outputs
-build/
-manufacturing/
-*.pdf
+# tscircuit
+/.tscircuit/
+/dist/
 
-# atopile dependencies
-.ato/
+# # KiCad
+# *-backups/
+# fp*cache
+# *.lck
+# \#auto_saved_files#
+# _autosave*
 
-# KiCad
-*-backups/
-fp*cache
-*.lck
-\#auto_saved_files#
-_autosave*
-
-# "Fabrication Toolkit" plugin
-production/
-fabrication-toolkit-options.json
+# # "Fabrication Toolkit" plugin
+# production/
+# fabrication-toolkit-options.json

@@ -1,10 +1,23 @@
 # PCB
 
-Designed with [atopile][ato] and [KiCad][kicad].
+Designed with [tscircuit][tscircuit] and [KiCad][kicad].
+
+## Must read
+
+- https://docs.tscircuit.com/
 
 ## Designing
 
-1. Install [atopile][ato]
+1. Setup development environment with [mise](https://mise.jdx.dev/getting-started.html)
+   - [IDE integration](https://mise.jdx.dev/ide-integration.html)
+2. Work on a PCB with live feedback
+   ```shell
+   bun run dev # then open file (e.g. src/board/mk1/pro/index.circuit.tsx)
+   ```
+3. Build a PCB
+   ```shell
+   bun run build
+   ```
 
 ## Manufacturing
 
@@ -41,7 +54,7 @@ Both prototype and production PCB is manufactured by [JLCPCB][jlcpcb].
 15. Enter shipping info and follow JLCPCB's instruction (e.g. production file confirmation)
 16. Wait for a week and you'll receive your very own board!
 
-[ato]: https://atopile.io/
+[tscircuit]: https://tscircuit.com/
 [kicad]: https://www.kicad.org/
 [jlcpcb]: https://jlcpcb.com/
 [fab-toolkit]: https://github.com/bennymeg/Fabrication-Toolkit

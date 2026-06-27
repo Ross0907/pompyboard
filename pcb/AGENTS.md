@@ -2,9 +2,13 @@
 
 ## Task Completion Requirements
 
-`mise build` must pass before considering tasks completed.
+`bun run build` must pass before considering tasks completed.
 
 ## Documentation
 
-For a given component, link to related PDF documents can be found in the README (e.g. @lib/mux-column/parts/PJSEMI_AH49HSC/README.md and @lib/st-stm32f429/README.md).
-To read a documentation, first read the README, look for PDF files on the same directory, then if one does not exist already, download the file so it can be used next time.
+For a given component, links to related documentations can be found in their README (e.g. @lib/STM32F429IGT6/README.md).
+To read a PDF documentation, look for PDF files on the same directory as README, then if one does not exist already, download the file so it can be used next time.
+
+## Dependencies
+
+Use Exact version. e.g. "x.y.z" instead of "^x.y.z".

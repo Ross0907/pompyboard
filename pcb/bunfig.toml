@@ -1,0 +1,4 @@
+# https://bun.com/docs/runtime/bunfig
+
+[install]
+minimumReleaseAge = 172800 # 2 days in seconds

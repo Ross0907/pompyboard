@@ -20,5 +20,8 @@ jobs:
           experimental: true
           working_directory: pcb
 
-      - run: mise build ci
+      - run: bun i
+        working-directory: pcb
+
+      - run: mise build
         working-directory: pcb

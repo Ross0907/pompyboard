@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "tsci": "tsci",
+        "dev": "tsci dev",
+        "build": "tsci build"
+    },
+    "devDependencies": {
+        "@types/react": "19.2.17",
+        "tscircuit": "0.0.1951"
+    }
+}
