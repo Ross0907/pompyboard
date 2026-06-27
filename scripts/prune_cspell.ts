@@ -1,9 +1,12 @@
 /**
  * Vibe-coded script for removing unnecessary words from cspell.yaml.
- * Created by Kimi K2.6 with opencode, reviewed and edited by pomp.
  *
  * Usage:
- *   deno run --allow-read --allow-write --allow-run scripts/prune_cspell.ts
+ *   mise exec -- deno run --allow-read --allow-write --allow-run scripts/prune_cspell.ts
+ *
+ * `cspell` is installed via mise's npm backend and needs `node` on PATH, so run the
+ * script through `mise exec` (node is declared in mise.toml). Running it with a bare
+ * `deno run` will fail the pre-flight check if `node` is not otherwise on PATH.
  *
  * What it does:
  *   1. Reads cspell.yaml.
@@ -123,6 +126,26 @@ async function runCspell(): Promise<number> {
 function extractWord(line: string): string {
     // line.trim() -> "- foobar"; slice(2) -> "foobar"
     return line.trim().slice(2)
+}
+
+// -------------------------------------------------------------------------------------------------
+// Pre-flight: make sure cspell actually runs and the project is currently clean.
+// A non-zero exit here means either cspell itself is broken (e.g. its `node` runtime is
+// missing, which exits 127) or there are pre-existing spelling errors. In both cases we
+// cannot safely prune, because every word would look "needed" or every removal look "safe".
+// Without this check the script silently keeps every word — the original bug.
+// -------------------------------------------------------------------------------------------------
+
+const baselineExit = await runCspell()
+if (baselineExit !== 0) {
+    await Deno.writeTextFile(cspellPath, originalContent)
+    console.error(
+        `\nPre-flight check failed: \`cspell .\` exited ${baselineExit} on the unmodified cspell.yaml.\n` +
+            "cspell must run successfully and the project must be spell-clean before pruning.\n" +
+            "Hint: the `cspell` tool is installed via the npm backend and needs `node` on PATH " +
+            "(declared in mise.toml). Run this script through mise, e.g. `mise exec -- deno run ...`.",
+    )
+    Deno.exit(1)
 }
 
 // -------------------------------------------------------------------------------------------------
