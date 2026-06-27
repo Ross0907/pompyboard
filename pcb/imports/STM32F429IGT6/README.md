@@ -3,6 +3,7 @@
 In case the links have expired, you can search the documents by their id (in parenthesis) at
 [st.com](https://www.st.com/).
 
+- [JLCPCB](https://jlcpcb.com/partdetail/STMicroelectronics-STM32F429IGT6/C54328)
 - [datasheet (DS9405)][datasheet]
   - see table of contents (page 3) for more info
   - page 13 - what the document is
