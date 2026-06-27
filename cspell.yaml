@@ -1,5 +1,3 @@
-# https://cspell.org/docs/Configuration/properties
-
 version: "0.2"
 useGitignore: true
 enableGlobDot: true
@@ -18,12 +16,13 @@ ignorePaths:
   - "**/parts/**/*.ato"
   - "*fp-lib-table"
 ignoreRegExpList:
-  # don't spell check vscode extension IDs
   - '"editor.defaultFormatter"\s*:\s*"[^"]*"'
   - '"recommendations"\s*:\s*\[[\s\S]*?\]'
 words:
   - ˈwɑːŋkəl
   - ADON
+  - AGND
+  - AVIN
   - BetaHuhn
   - binstall
   - boiz
@@ -69,10 +68,13 @@ words:
   - oversample
   - PCBA
   - pclk
+  - PGND
   - Phong
   - pinout
   - pompydev
   - protonmail
+  - PSRR
+  - PVIN
   - PWRCLK
   - railpack
   - railwayapp
@@ -89,6 +91,7 @@ words:
   - swstart
   - sysclk
   - thumbv
+  - TPS62152RGTR
   - TRACESWO
   - trivago
   - tsci
