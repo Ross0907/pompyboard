@@ -1,0 +1,28 @@
+diff --git a/node_modules/@tscircuit/circuit-json-util/.bun-tag-d3a400d504f2a130 b/.bun-tag-d3a400d504f2a130
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/dist/index.js b/dist/index.js
+index 76611df111df846b998dc4e5f5ff5407fe15167d..797227dc30596534012d0a93422ec950f5c43bc4 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1341,6 +1341,20 @@ var getBoundsOfPcbElements = (elements) => {
+       }
+       continue;
+     }
++    if (elm.type === "pcb_smtpad" && (elm.shape === "rotated_rect" || elm.shape === "rotated_pill")) {
++      const rotatedBounds = getRotatedRectBounds(
++        elm.x,
++        elm.y,
++        elm.width,
++        elm.height,
++        elm.ccw_rotation
++      );
++      minX = Math.min(minX, rotatedBounds.minX);
++      minY = Math.min(minY, rotatedBounds.minY);
++      maxX = Math.max(maxX, rotatedBounds.maxX);
++      maxY = Math.max(maxY, rotatedBounds.maxY);
++      continue;
++    }
+     if (elm.type === "pcb_hole" && elm.hole_shape === "circle") {
+       const holeBounds = getCircleBounds(elm.x, elm.y, elm.hole_diameter);
+       minX = Math.min(minX, holeBounds.minX);

@@ -11,5 +11,8 @@
         "@types/react": "19.2.17",
         "prettier": "3.8.1",
         "tscircuit": "0.0.1951"
+    },
+    "patchedDependencies": {
+        "@tscircuit/circuit-json-util@0.0.96": "patches/@tscircuit%2Fcircuit-json-util@0.0.96.patch"
     }
 }
