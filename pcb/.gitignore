@@ -5,6 +5,9 @@
 /.tscircuit/
 /dist/
 
+# documentations
+*.pdf
+
 # # KiCad
 # *-backups/
 # fp*cache
