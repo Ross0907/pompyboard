@@ -16,7 +16,7 @@
         "experimentalDecorators": true,
         "types": ["tscircuit"],
         "paths": {
-            "@imports/*": ["./imports/*"]
+            "@/*": ["./*"]
         }
     },
     "include": ["**/*.ts", "**/*.tsx"],
