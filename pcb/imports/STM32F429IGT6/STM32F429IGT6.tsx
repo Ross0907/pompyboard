@@ -185,6 +185,14 @@ export const STM32F429IGT6 = (props: ChipProps<typeof pinLabels>) => {
     return (
         <chip
             pinLabels={pinLabels}
+            pinAttributes={{
+                VDD: { requiresPower: true },
+                VDDA: { requiresPower: true },
+                VBAT: { requiresPower: true },
+                VREFpos: { requiresPower: true },
+                VSS: { requiresGround: true },
+                VSSA: { requiresGround: true },
+            }}
             supplierPartNumbers={{
                 jlcpcb: ["C54328"],
             }}

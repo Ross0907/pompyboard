@@ -32,6 +32,10 @@ export const CD74HC4067SM96 = (props: ChipProps<typeof pinLabels>) => {
     return (
         <chip
             pinLabels={pinLabels}
+            pinAttributes={{
+                VCC: { requiresPower: true },
+                GND: { requiresGround: true },
+            }}
             supplierPartNumbers={{
                 jlcpcb: ["C98457"],
             }}
