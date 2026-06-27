@@ -8,13 +8,9 @@
 # documentations
 *.pdf
 
-# # KiCad
-# *-backups/
-# fp*cache
-# *.lck
-# \#auto_saved_files#
-# _autosave*
-
-# # "Fabrication Toolkit" plugin
-# production/
-# fabrication-toolkit-options.json
+# KiCad
+*-backups/
+fp*cache
+*.lck
+\#auto_saved_files#
+_autosave*
