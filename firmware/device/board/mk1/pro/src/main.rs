@@ -2,17 +2,11 @@
 #![no_main]
 #![no_std]
 
-mod crc16;
-mod profiler;
-mod sensor;
-mod tablet;
-mod telemetry;
-mod usb;
-
 use defmt_rtt as _;
 // See https://defmt.ferrous-systems.com/global-logger for more information
 use panic_probe as _; // Print panic message to probe console
 use stm32f4xx_hal::{otg_fs, pac, prelude::*, rcc::Config};
+use wonkle::{profiler, sensor, tablet, telemetry, usb};
 
 const USB_ENUMERATION_DELAY_MS: u32 = 3000;
 

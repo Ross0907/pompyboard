@@ -1,0 +1,20 @@
+[package]
+name = "wonkleboard-mk1-pro"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wonkle = { path = "../../../../lib" }
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.5"
+# https://github.com/stm32-rs/stm32f4xx-hal/tree/ce13475082c7b3c217a731b0ded6cd2e998bbf12
+stm32f4xx-hal = { git = "https://github.com/stm32-rs/stm32f4xx-hal", rev = "ce13475", features = [
+    "stm32f429",
+    "usb_fs",
+    "defmt",
+] }
+
+# See https://defmt.ferrous-systems.com/setup
+defmt = "1.0.1"
+defmt-rtt = "1.0.0"
+panic-probe = { version = "1.0.0", features = ["print-defmt"] }

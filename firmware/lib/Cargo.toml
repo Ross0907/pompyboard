@@ -1,0 +1,24 @@
+[package]
+name = "wonkle"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cortex-m = "0.7.7"
+embedded-hal = "1.0.0"
+nb = "1.1.0"
+# https://github.com/stm32-rs/stm32f4xx-hal/tree/ce13475082c7b3c217a731b0ded6cd2e998bbf12
+stm32f4xx-hal = { git = "https://github.com/stm32-rs/stm32f4xx-hal", rev = "ce13475", features = [
+    "stm32f429",
+    "usb_fs",
+    "defmt",
+] }
+serde = { version = "1.0.219", default-features = false }
+
+# USB
+usb-device = "0.3.2"
+usbd-serial = "0.2.2"
+usbd-hid = "0.8.2"
+
+# See https://defmt.ferrous-systems.com/setup
+defmt = "1.0.1"

@@ -23,8 +23,18 @@
 ### Flash and run
 
 See https://probe.rs/docs/tools/probe-rs/ for more information.
+See [`./Cargo.toml`](./Cargo.toml) to see available devices.
+
+Pick a device with `-p <package>`:
 
 ```bash
+cargo run --release -p wonkleboard-mk1-pro
+```
+
+Or from inside a device crate:
+
+```bash
+cd device/board/mk1/pro
 cargo run --release
 ```
 

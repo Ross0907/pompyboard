@@ -238,24 +238,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "firmware"
-version = "0.1.0"
-dependencies = [
- "cortex-m",
- "cortex-m-rt",
- "defmt 1.0.1",
- "defmt-rtt",
- "embedded-hal 1.0.0",
- "nb 1.1.0",
- "panic-probe",
- "serde",
- "stm32f4xx-hal",
- "usb-device",
- "usbd-hid",
- "usbd-serial",
-]
-
-[[package]]
 name = "fugit"
 version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -696,6 +678,34 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de437e2a6208b014ab52972a27e59b33fa2920d3e00fe05026167a1c509d19cc"
 dependencies = [
  "vcell",
+]
+
+[[package]]
+name = "wonkle"
+version = "0.1.0"
+dependencies = [
+ "cortex-m",
+ "defmt 1.0.1",
+ "embedded-hal 1.0.0",
+ "nb 1.1.0",
+ "serde",
+ "stm32f4xx-hal",
+ "usb-device",
+ "usbd-hid",
+ "usbd-serial",
+]
+
+[[package]]
+name = "wonkleboard-mk1-pro"
+version = "0.1.0"
+dependencies = [
+ "cortex-m",
+ "cortex-m-rt",
+ "defmt 1.0.1",
+ "defmt-rtt",
+ "panic-probe",
+ "stm32f4xx-hal",
+ "wonkle",
 ]
 
 [[package]]
