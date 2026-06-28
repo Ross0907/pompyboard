@@ -2,7 +2,7 @@ import type { ChipProps } from "@tscircuit/props"
 
 // See "Pinout" section of the datasheet (page 1)
 const pinLabels = {
-    pin1: ["COMMON_INPUT_OUTPUT"],
+    pin1: ["COM", "COMMON_INPUT_OUTPUT"],
     pin2: ["I7"],
     pin3: ["I6"],
     pin4: ["I5"],
@@ -40,6 +40,46 @@ export const CD74HC4067SM96 = (props: ChipProps<typeof pinLabels>) => {
                 jlcpcb: ["C98457"],
             }}
             manufacturerPartNumber="CD74HC4067SM96"
+            schHeight={3.5}
+            schPinArrangement={{
+                topSide: {
+                    direction: "left-to-right",
+                    pins: ["VCC"],
+                },
+                leftSide: {
+                    direction: "top-to-bottom",
+                    pins: ["COM", "S0", "S1", "S2", "S3", "E"],
+                },
+                rightSide: {
+                    direction: "top-to-bottom",
+                    pins: [
+                        "I0",
+                        "I1",
+                        "I2",
+                        "I3",
+                        "I4",
+                        "I5",
+                        "I6",
+                        "I7",
+                        "I8",
+                        "I9",
+                        "I10",
+                        "I11",
+                        "I12",
+                        "I13",
+                        "I14",
+                        "I15",
+                    ],
+                },
+                bottomSide: {
+                    direction: "left-to-right",
+                    pins: ["GND"],
+                },
+            }}
+            schPinStyle={{
+                COM: { bottomMargin: 0.4 },
+                E: { topMargin: 0.4 },
+            }}
             footprint={
                 <footprint>
                     <smtpad

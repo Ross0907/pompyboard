@@ -18,6 +18,21 @@ export const AH49HSC = (props: ChipProps<typeof pinLabels>) => {
                 jlcpcb: ["C510723"],
             }}
             manufacturerPartNumber="AH49HSC"
+            schHeight={1}
+            schPinArrangement={{
+                topSide: {
+                    direction: "left-to-right",
+                    pins: ["VDD"],
+                },
+                rightSide: {
+                    direction: "top-to-bottom",
+                    pins: ["OUT"],
+                },
+                bottomSide: {
+                    direction: "left-to-right",
+                    pins: ["GND"],
+                },
+            }}
             footprint={
                 <footprint>
                     <smtpad

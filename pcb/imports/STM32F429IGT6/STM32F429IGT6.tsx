@@ -181,6 +181,23 @@ const pinLabels = {
     pin176: ["PI7"],
 } as const
 
+function filterPins(...patterns: RegExp[]): (keyof typeof pinLabels)[] {
+    return Object.entries(pinLabels)
+        .filter(([, labels]) =>
+            (labels as readonly string[]).some((label) =>
+                patterns.some((pattern) => pattern.test(label)),
+            ),
+        )
+        .sort(([, aLabels], [, bLabels]) =>
+            (aLabels as readonly string[])[0].localeCompare(
+                (bLabels as readonly string[])[0],
+                undefined,
+                { numeric: true },
+            ),
+        )
+        .map(([pinName]) => pinName as keyof typeof pinLabels)
+}
+
 export const STM32F429IGT6 = (props: ChipProps<typeof pinLabels>) => {
     return (
         <chip
@@ -197,6 +214,56 @@ export const STM32F429IGT6 = (props: ChipProps<typeof pinLabels>) => {
                 jlcpcb: ["C54328"],
             }}
             manufacturerPartNumber="STM32F429IGT6"
+            schWidth={5}
+            schHeight={19}
+            schPinArrangement={{
+                topSide: {
+                    direction: "left-to-right",
+                    pins: ["VBAT", ...filterPins(/^VDD$/), "VDDA"],
+                },
+                leftSide: {
+                    direction: "top-to-bottom",
+                    pins: [
+                        "BYPASS_REG",
+                        "NRST",
+                        "PDR_ON",
+                        "BOOT0",
+                        "VREFpos",
+                        ...filterPins(/^PI\d\d?$/),
+                        ...filterPins(/^PH\d\d?$/),
+                        ...filterPins(/^PG\d\d?$/),
+                        ...filterPins(/^PF\d\d?$/),
+                        "VCAP_1",
+                        "VCAP_2",
+                    ],
+                },
+                rightSide: {
+                    direction: "top-to-bottom",
+                    pins: [
+                        ...filterPins(/^PA\d\d?$/),
+                        ...filterPins(/^PB\d\d?$/),
+                        ...filterPins(/^PC\d\d?$/),
+                        ...filterPins(/^PD\d\d?$/),
+                        ...filterPins(/^PE\d\d?$/),
+                    ],
+                },
+                bottomSide: {
+                    direction: "left-to-right",
+                    pins: ["VSS", "VSSA"],
+                },
+            }}
+            schPinStyle={{
+                PI0: { topMargin: 0.4 },
+                PH0: { topMargin: 0.4 },
+                PC0: { topMargin: 0.4 },
+                PD0: { topMargin: 0.4 },
+                PA0: { topMargin: 0.4 },
+                PB0: { topMargin: 0.4 },
+                PE0: { topMargin: 0.4 },
+                PF0: { topMargin: 0.4 },
+                PG0: { topMargin: 0.4 },
+                VCAP_1: { topMargin: 0.4 },
+            }}
             footprint={
                 <footprint>
                     <smtpad
