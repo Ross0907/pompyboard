@@ -10,15 +10,11 @@
  *
  * What it does:
  *   1. Reads cspell.yaml.
- *   2. Iterates over every word in the `words` list.
- *   3. For each word, temporarily removes it and runs `cspell .` at the project root.
- *   4. If cspell reports no errors, the word is considered unnecessary and is dropped.
- *   5. If cspell reports errors (non-zero exit), the word is needed and is restored.
- *   6. After processing all words, the final pruned list is written back to cspell.yaml.
- *
- * Strategy note:
- *   This is a greedy, single-pass algorithm. It removes words that can be proven unnecessary
- *   given the current state of the file, but it does not guarantee a globally minimal set.
+ *   2. Verifies the current config passes `cspell .`.
+ *   3. Temporarily removes the whole custom `words` list.
+ *   4. Runs cspell once in unknown-words-only mode.
+ *   5. Treats configured words absent from the unknown-word output as removal candidates.
+ *   6. Removes candidates one at a time only when `cspell .` still passes.
  */
 
 import { dirname, join } from "jsr:@std/path@1.1.5"
@@ -100,6 +96,14 @@ const red = (text: string) => `\x1b[31m${text}\x1b[0m`
 
 /** Reassemble the full file content given a (possibly reduced) word list. */
 function buildContent(currentWordLines: string[]): string {
+    if (currentWordLines.length === 0) {
+        return [
+            ...allLines.slice(0, wordsStart - 1),
+            `${allLines[wordsStart - 1].replace(/:.*/, "")}: []`,
+            ...allLines.slice(wordsEnd),
+        ].join("\n")
+    }
+
     return [
         ...allLines.slice(0, wordsStart),
         ...currentWordLines,
@@ -107,18 +111,40 @@ function buildContent(currentWordLines: string[]): string {
     ].join("\n")
 }
 
-/** Run `cspell .` from the project root and return the exit code. */
-async function runCspell(): Promise<number> {
+type CspellResult = {
+    code: number
+    stdout: string
+    stderr: string
+}
+
+const textDecoder = new TextDecoder()
+
+/** Run cspell from the project root and return its output. */
+async function runCspell(args: string[]): Promise<CspellResult> {
     try {
-        const { code } = await Deno.spawnAndWait("cspell", ["."], {
+        const { code, stdout, stderr } = await new Deno.Command("cspell", {
+            args,
             cwd: projectRoot,
-            stdout: "null",
-            stderr: "null",
-        })
-        return code
+            stdout: "piped",
+            stderr: "piped",
+        }).output()
+
+        return {
+            code,
+            stdout: textDecoder.decode(stdout),
+            stderr: textDecoder.decode(stderr),
+        }
     } catch (err) {
         console.error("Failed to spawn `cspell`. Is it installed and in PATH?", err)
         throw err
+    }
+}
+
+function printCspellFailure(context: string, result: CspellResult): void {
+    console.error(`${context} failed with exit code ${result.code}.`)
+    const output = [result.stderr.trim(), result.stdout.trim()].filter(Boolean).join("\n")
+    if (output) {
+        console.error(output)
     }
 }
 
@@ -128,68 +154,125 @@ function extractWord(line: string): string {
     return line.trim().slice(2)
 }
 
+function normalizeWord(word: string): string {
+    return word.toLocaleLowerCase("en-US")
+}
+
+function getComparableWords(word: string): string[] {
+    const camelSplit = word
+        .replace(/([\p{Ll}\p{Nd}])(\p{Lu})/gu, "$1 $2")
+        .replace(/(\p{Lu}+)(\p{Lu}\p{Ll})/gu, "$1 $2")
+
+    return [
+        word,
+        ...(camelSplit.match(/[\p{L}\p{N}]+/gu) ?? []),
+        ...(camelSplit.match(/\p{L}{3,}/gu) ?? []),
+    ]
+}
+
+function shouldKeepWord(
+    word: string,
+    unknownWords: Set<string>,
+    normalizedUnknownWords: Set<string>,
+): boolean {
+    return getComparableWords(word).some(
+        (part) => unknownWords.has(part) || normalizedUnknownWords.has(normalizeWord(part)),
+    )
+}
+
 // -------------------------------------------------------------------------------------------------
-// Pre-flight: make sure cspell actually runs and the project is currently clean.
-// A non-zero exit here means either cspell itself is broken (e.g. its `node` runtime is
-// missing, which exits 127) or there are pre-existing spelling errors. In both cases we
-// cannot safely prune, because every word would look "needed" or every removal look "safe".
-// Without this check the script silently keeps every word — the original bug.
+// Output-driven pruning
 // -------------------------------------------------------------------------------------------------
 
-const baselineExit = await runCspell()
-if (baselineExit !== 0) {
-    await Deno.writeTextFile(cspellPath, originalContent)
-    console.error(
-        `\nPre-flight check failed: \`cspell .\` exited ${baselineExit} on the unmodified cspell.yaml.\n` +
-            "cspell must run successfully and the project must be spell-clean before pruning.\n" +
-            "Hint: the `cspell` tool is installed via the npm backend and needs `node` on PATH " +
-            "(declared in mise.toml). Run this script through mise, e.g. `mise exec -- deno run ...`.",
-    )
+const checkArgs = ["lint", "--no-progress", "--no-summary", "."]
+const collectArgs = [
+    "lint",
+    "--words-only",
+    "--unique",
+    "--no-progress",
+    "--no-summary",
+    "--no-exit-code",
+    ".",
+]
+
+const baselineResult = await runCspell(checkArgs)
+if (baselineResult.code !== 0) {
+    printCspellFailure("Baseline cspell check", baselineResult)
     Deno.exit(1)
 }
 
-// -------------------------------------------------------------------------------------------------
-// Greedy pruning loop
-// -------------------------------------------------------------------------------------------------
+await Deno.writeTextFile(cspellPath, buildContent([]))
 
-const remaining = [...wordLines]
-let removedCount = 0
-let keptCount = 0
+let collectResult: CspellResult
+try {
+    collectResult = await runCspell(collectArgs)
+} catch {
+    await Deno.writeTextFile(cspellPath, originalContent)
+    Deno.exit(1)
+}
 
-for (let i = 0; i < remaining.length; i++) {
-    const candidateLine = remaining[i]
-    const candidateWord = extractWord(candidateLine)
+if (collectResult.code !== 0) {
+    printCspellFailure("Unknown-word collection", collectResult)
+    await Deno.writeTextFile(cspellPath, originalContent)
+    Deno.exit(1)
+}
 
-    // Build a temporary file that omits the candidate word
-    const testSet = [...remaining]
-    testSet.splice(i, 1)
-    await Deno.writeTextFile(cspellPath, buildContent(testSet))
+const unknownWords = new Set(
+    collectResult.stdout
+        .split(/\r?\n/)
+        .map((word) => word.trim())
+        .filter(Boolean),
+)
+const normalizedUnknownWords = new Set([...unknownWords].map(normalizeWord))
 
-    let exitCode: number
-    try {
-        exitCode = await runCspell()
-    } catch {
-        // Spawn failed → restore original and bail out
-        await Deno.writeTextFile(cspellPath, originalContent)
-        Deno.exit(1)
-    }
+const removalCandidateIndexes: number[] = []
 
-    if (exitCode === 0) {
-        // cspell is happy without this word → permanently remove it
-        console.log(`  ${red("✓ remove:")} ${candidateWord}`)
-        remaining.splice(i, 1)
-        i-- // adjust index because we removed the current element
-        removedCount++
+for (let index = 0; index < wordLines.length; index++) {
+    const line = wordLines[index]
+    const word = extractWord(line)
+    if (shouldKeepWord(word, unknownWords, normalizedUnknownWords)) {
+        console.log(`  ${green("✗ keep:")}    ${word}`)
     } else {
-        // cspell failed → the word is still needed
-        console.log(`  ${green("✗ keep:")}    ${candidateWord}`)
-        keptCount++
+        removalCandidateIndexes.push(index)
     }
 }
+
+const removedIndexes = new Set<number>()
+
+for (const index of removalCandidateIndexes) {
+    const word = extractWord(wordLines[index])
+    const candidateRemovedIndexes = new Set(removedIndexes)
+    candidateRemovedIndexes.add(index)
+    const candidateWordLines = wordLines.filter(
+        (_, wordIndex) => !candidateRemovedIndexes.has(wordIndex),
+    )
+
+    await Deno.writeTextFile(cspellPath, buildContent(candidateWordLines))
+    const candidateResult = await runCspell(checkArgs)
+
+    if (candidateResult.code === 0) {
+        console.log(`  ${red("✓ remove:")} ${word}`)
+        removedIndexes.add(index)
+    } else {
+        console.log(`  ${green("✗ keep:")}    ${word}`)
+    }
+}
+
+const remaining = wordLines.filter((_, index) => !removedIndexes.has(index))
+const removedCount = removedIndexes.size
 
 // -------------------------------------------------------------------------------------------------
 // Write final result
 // -------------------------------------------------------------------------------------------------
 
 await Deno.writeTextFile(cspellPath, buildContent(remaining))
-console.log(`\nDone. Kept ${keptCount} word(s), removed ${removedCount} word(s).`)
+
+const finalResult = await runCspell(checkArgs)
+if (finalResult.code !== 0) {
+    printCspellFailure("Final cspell check", finalResult)
+    console.error("Restoring original cspell.yaml because the pruned config did not validate.")
+    await Deno.writeTextFile(cspellPath, originalContent)
+    Deno.exit(1)
+}
+
+console.log(`\nDone. Kept ${remaining.length} word(s), removed ${removedCount} word(s).`)
