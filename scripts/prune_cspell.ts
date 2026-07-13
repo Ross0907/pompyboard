@@ -13,8 +13,8 @@
  *   2. Verifies the current config passes `cspell .`.
  *   3. Temporarily removes the whole custom `words` list.
  *   4. Runs cspell once in unknown-words-only mode.
- *   5. Treats configured words absent from the unknown-word output as removal candidates.
- *   6. Removes candidates one at a time only when `cspell .` still passes.
+ *   5. Keeps only configured words that appear in the unknown-word output.
+ *   6. Writes the pruned list and validates it with `cspell .`.
  */
 
 import { dirname, join } from "jsr:@std/path@1.1.5"
@@ -225,41 +225,19 @@ const unknownWords = new Set(
 )
 const normalizedUnknownWords = new Set([...unknownWords].map(normalizeWord))
 
-const removalCandidateIndexes: number[] = []
+const remaining: string[] = []
+let removedCount = 0
 
-for (let index = 0; index < wordLines.length; index++) {
-    const line = wordLines[index]
+for (const line of wordLines) {
     const word = extractWord(line)
     if (shouldKeepWord(word, unknownWords, normalizedUnknownWords)) {
         console.log(`  ${green("✗ keep:")}    ${word}`)
+        remaining.push(line)
     } else {
-        removalCandidateIndexes.push(index)
-    }
-}
-
-const removedIndexes = new Set<number>()
-
-for (const index of removalCandidateIndexes) {
-    const word = extractWord(wordLines[index])
-    const candidateRemovedIndexes = new Set(removedIndexes)
-    candidateRemovedIndexes.add(index)
-    const candidateWordLines = wordLines.filter(
-        (_, wordIndex) => !candidateRemovedIndexes.has(wordIndex),
-    )
-
-    await Deno.writeTextFile(cspellPath, buildContent(candidateWordLines))
-    const candidateResult = await runCspell(checkArgs)
-
-    if (candidateResult.code === 0) {
         console.log(`  ${red("✓ remove:")} ${word}`)
-        removedIndexes.add(index)
-    } else {
-        console.log(`  ${green("✗ keep:")}    ${word}`)
+        removedCount++
     }
 }
-
-const remaining = wordLines.filter((_, index) => !removedIndexes.has(index))
-const removedCount = removedIndexes.size
 
 // -------------------------------------------------------------------------------------------------
 // Write final result
