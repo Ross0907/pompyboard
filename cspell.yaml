@@ -36,6 +36,7 @@ words:
   - codegen
   - courtyardoutline
   - datasheet
+  - datasheets
   - defmt
   - drei
   - eabihf
@@ -54,6 +55,7 @@ words:
   - JTDI
   - JTDO
   - JTMS
+  - KHTML
   - kicad
   - licence
   - licences

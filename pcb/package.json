@@ -1,18 +1,18 @@
 {
     "scripts": {
-        "tsci": "tsci",
-        "dev": "tsci dev",
-        "build": "tsci build",
-        "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "build": ":",
+        "gen-docs": "bun run scripts/docs.ts",
+        "fmt:check": "prettier -l .",
+        "tsc": "tsc --noEmit"
+    },
+    "dependencies": {
+        "yaml": "2.8.1",
+        "zod": "4.1.12"
     },
     "devDependencies": {
-        "@trivago/prettier-plugin-sort-imports": "6.0.2",
-        "@types/react": "19.2.17",
-        "prettier": "3.8.1",
-        "tscircuit": "0.0.1951"
-    },
-    "patchedDependencies": {
-        "@tscircuit/circuit-json-util@0.0.96": "patches/@tscircuit%2Fcircuit-json-util@0.0.96.patch"
+        "@types/bun": "1.3.2",
+        "@types/node": "26.1.0",
+        "prettier": "3.9.4",
+        "typescript": "5.9.3"
     }
 }

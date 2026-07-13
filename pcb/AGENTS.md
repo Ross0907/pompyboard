@@ -2,12 +2,15 @@
 
 ## Task Completion Requirements
 
-`bun run build` must pass before considering tasks completed.
+`mise verify` must pass before considering tasks completed.
 
 ## Documentation
 
-For a given component, links to related documentations can be found in their README (e.g. @lib/STM32F429IGT6/README.md).
-To read a PDF documentation, look for PDF files on the same directory as README, then if one does not exist already, download the file so it can be used next time.
+For a given component, links to its documentations and other related information can be found in `docs/components/*.md`.
+Its front matter defines available documentations and the markdown body may contain other useful information.
+PDF documentations are saved as `docs/components/*.pdf`.
+If a PDF file that's defined in the front matter was not be found in the file system, run `bun run gen-docs` to download them.
+If a PDF file is still not found, ask for the user to provide one.
 
 ## Dependencies
 

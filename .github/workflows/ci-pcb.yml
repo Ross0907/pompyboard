@@ -23,8 +23,5 @@ jobs:
       - run: bun i
         working-directory: pcb
 
-      - run: bunx prettier -l .
-        working-directory: pcb
-
-      - run: bun run build
+      - run: mise verify
         working-directory: pcb

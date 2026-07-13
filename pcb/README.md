@@ -1,23 +1,13 @@
 # PCB
 
-Designed with [tscircuit][tscircuit] and [KiCad][kicad].
-
-## Must read
-
-- https://docs.tscircuit.com/
+Designed with [KiCad][kicad].
 
 ## Designing
 
-1. Setup development environment with [mise](https://mise.jdx.dev/getting-started.html)
-   - [IDE integration](https://mise.jdx.dev/ide-integration.html)
-2. Work on a PCB with live feedback
-   ```shell
-   bun run dev # then open file (e.g. src/board/mk1/pro/index.circuit.tsx)
-   ```
-3. Build a PCB
-   ```shell
-   bun run build
-   ```
+- Every PCB is designed with KiCad `v10.0.3`.
+- you can learn more about each of the components and read their documentations at
+  [`docs/components`](./docs/components/README.md).
+  Running `bun run gen-docs` will download PDF documentations.
 
 ## Manufacturing
 
@@ -54,7 +44,6 @@ Both prototype and production PCB is manufactured by [JLCPCB][jlcpcb].
 15. Enter shipping info and follow JLCPCB's instruction (e.g. production file confirmation)
 16. Wait for a week and you'll receive your very own board!
 
-[tscircuit]: https://tscircuit.com/
 [kicad]: https://www.kicad.org/
 [jlcpcb]: https://jlcpcb.com/
 [fab-toolkit]: https://github.com/bennymeg/Fabrication-Toolkit
